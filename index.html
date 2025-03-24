@@ -1,0 +1,87 @@
+<!--
+ * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
+ * @Date: 2025-03-25 00:05:17
+ * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
+ * @LastEditTime: 2025-03-25 00:15:34
+ * @FilePath: /undefined/Users/tonyzhang/index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB 示例</title>
+</head>
+<body>
+
+    <h1>IndexedDB 数据示例</h1>
+    <input type="text" id="name" placeholder="输入名称" />
+    <input type="text" id="num" placeholder="输入手机号" />
+    <button onclick="saveData()">保存数据</button>
+    <button onclick="loadData()">加载数据</button>
+    
+    <p id="storedData">存储的数据将显示在这里。</p>
+
+    <script>
+        let db;
+
+        // 打开数据库
+        function openDatabase() {
+            const request = indexedDB.open("myDatabase", 1);
+
+            request.onsuccess = function(event) {
+                db = event.target.result;
+                console.log("数据库打开成功！");
+            };
+
+            request.onerror = function(event) {
+                console.log("数据库打开失败:", event.target.error);
+            };
+
+            request.onupgradeneeded = function(event) {
+                db = event.target.result;
+                if (!db.objectStoreNames.contains("dataStore")) {
+                    db.createObjectStore("dataStore", { keyPath: "id" });
+                }
+            };
+        }
+
+        // 保存数据到 IndexedDB
+        function saveData() {
+            const name = document.getElementById("name").value;
+            const num = document.getElementById("num").value;
+            const data={
+                name,
+                num
+            }
+            const transaction = db.transaction(["dataStore"], "readwrite");
+            const store = transaction.objectStore("dataStore");
+            const item = { id: 1, data: JSON.stringify(data) };
+            store.put(item);  // 使用 put 方法保存数据
+            alert("数据已保存！");
+        }
+
+        // 从 IndexedDB 加载数据
+        function loadData() {
+            const transaction = db.transaction(["dataStore"], "readonly");
+            const store = transaction.objectStore("dataStore");
+            const request = store.get(1);  // 获取 ID 为 1 的数据
+
+            request.onsuccess = function(event) {
+                const result =event.target.result;
+
+                if (result) {
+                    document.getElementById("storedData").innerText = "存储的数据: " + JSON.parse(result.data).name;
+                } else {
+                    document.getElementById("storedData").innerText = "没有存储数据。";
+                }
+            };
+        }
+
+        // 页面加载时打开数据库
+        window.onload = openDatabase;
+    </script>
+
+</body>
+</html>
