@@ -2,86 +2,216 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-25 00:15:34
- * @FilePath: /undefined/Users/tonyzhang/index.html
+ * @LastEditTime: 2025-03-26 17:52:18
+ * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <!DOCTYPE html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IndexedDB 示例</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大山故事信息系统</title>
 
-    <h1>IndexedDB 数据示例</h1>
-    <input type="text" id="name" placeholder="输入名称" />
-    <input type="text" id="num" placeholder="输入手机号" />
-    <button onclick="saveData()">保存数据</button>
-    <button onclick="loadData()">加载数据</button>
-    
-    <p id="storedData">存储的数据将显示在这里。</p>
+    <!-- 引入 Firebase SDK -->
 
-    <script>
-        let db;
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #storedData {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="add-box">
+      <h1>大山故事信息系统</h1>
 
-        // 打开数据库
-        function openDatabase() {
-            const request = indexedDB.open("myDatabase", 1);
+      <di class="input-box">
+        <input class="inputname" type="text" id="inputData" placeholder="名称" />
+        <input class="inputphone" type="text" id="inputData" placeholder="电话" />
+      </di>
 
-            request.onsuccess = function(event) {
-                db = event.target.result;
-                console.log("数据库打开成功！");
-            };
+      <button class="add-btn" id="myButton">添加数据</button>
+      <!-- <button class="add-btn" id="myButton2">检测是否存在</button> -->
 
-            request.onerror = function(event) {
-                console.log("数据库打开失败:", event.target.error);
-            };
+      <div class="data-box" id="storedData">
+        <div class="item">
+            <div class="name" id="name">名称</div>
+            <div class="phone" id="puone">电话号</div>
+        </div>
+        <div class="item">
+          <div class="name" id="name">张制品</div>
+          <div class="phone" id="puone">137278378728</div>
+        </div>
+        <div class="item">
+          <div class="name" id="name">张制品</div>
+          <div class="phone" id="puone">137278378728</div>
+        </div>
+      </div>
+    </div>
 
-            request.onupgradeneeded = function(event) {
-                db = event.target.result;
-                if (!db.objectStoreNames.contains("dataStore")) {
-                    db.createObjectStore("dataStore", { keyPath: "id" });
-                }
-            };
-        }
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        child,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
 
-        // 保存数据到 IndexedDB
-        function saveData() {
-            const name = document.getElementById("name").value;
-            const num = document.getElementById("num").value;
-            const data={
-                name,
-                num
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAiD20QuH2l6FrmJ4iun4g_1no9fUima-4",
+        authDomain: "dashangushi.firebaseapp.com",
+        projectId: "dashangushi",
+        storageBucket: "dashangushi.firebasestorage.app",
+        messagingSenderId: "810925226704",
+        appId: "1:810925226704:web:76199aabe4cbf1cc137cd5",
+        measurementId: "G-0CZHBWD0XF",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const analytics = getAnalytics(app);
+
+      function getRandom10DigitNumber() {
+        return Math.floor(1000000000 + Math.random() * 9000000000);
+      }
+
+      // 获取数据库中的数据
+      // 读取数据
+      function loadData() {
+        const dataRef = ref(db, "users");
+        console.log("读取数据", dataRef);
+
+        get(dataRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log("读取数据", snapshot.val());
+              //   document.getElementById("storedData").innerText =
+              //     "共享数据: " + snapshot.val();
+            } else {
+              //   document.getElementById("storedData").innerText = "没有数据";
             }
-            const transaction = db.transaction(["dataStore"], "readwrite");
-            const store = transaction.objectStore("dataStore");
-            const item = { id: 1, data: JSON.stringify(data) };
-            store.put(item);  // 使用 put 方法保存数据
-            alert("数据已保存！");
-        }
+          })
+          .catch((error) => {
+            console.error("读取数据失败: ", error);
+          });
+      }
+      // 保存数据到 Firebase
+      function saveData(data) {
+        let path = "users/";
+        let id = getRandom10DigitNumber();
+        const dataRef = ref(db, patt + id); // 指定存储路径
 
-        // 从 IndexedDB 加载数据
-        function loadData() {
-            const transaction = db.transaction(["dataStore"], "readonly");
-            const store = transaction.objectStore("dataStore");
-            const request = store.get(1);  // 获取 ID 为 1 的数据
+        console.log("ssswwwsss", dataRef, data);
 
-            request.onsuccess = function(event) {
-                const result =event.target.result;
+        set(dataRef, data) // 将数据存储到指定路径
+          .then(() => {
+            console.log("数据已保存！");
+          })
+          .catch((error) => {
+            console.error("保存数据失败: ", error);
+          });
+      }
 
-                if (result) {
-                    document.getElementById("storedData").innerText = "存储的数据: " + JSON.parse(result.data).name;
-                } else {
-                    document.getElementById("storedData").innerText = "没有存储数据。";
-                }
-            };
-        }
+      // 获取按钮并添加点击事件监听器
+      document.getElementById("myButton").addEventListener("click", () => {
+        // 调用导入的函数
 
-        // 页面加载时打开数据库
-        window.onload = openDatabase;
+        console.log("ssssss");
+        let data = {
+          username: "zhangzhimin",
+          phone: "137867867289",
+        };
+        saveData(data);
+      });
+      // 调用方法
+      window.onload = function () {
+        loadData(); // 页面加载时读取数据
+        // listenForChanges(); // 监听数据变化
+      };
+      console.log("ssss", analytics, db);
     </script>
 
-</body>
+    <style>
+      .add-btn {
+        margin: 10px;
+        width: 200px;
+        height: 35px;
+        font-size: 16px;
+
+     
+      }
+      .inputname{
+            width: 200px;
+            height: 35px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .inputphone{
+            width: 200px;
+            height: 35px;
+            font-size: 16px;
+        }
+      .input-box
+      {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+      }
+      .data-box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #000;
+        /* padding: 20px 0px; */
+        padding-bottom: 10px;
+        box-sizing: border-box;
+
+        width: 300px;
+        .item {
+        box-sizing: border-box;
+
+            width: 100%;
+          line-height: 30px;
+          height: 30px;
+          padding: 0px 10px;
+          border-bottom: 1px solid #000;
+          display: flex;
+          .name {
+            border-right: 1px solid #000;
+            flex: 1;
+            text-align: center;
+          }
+          .phone{
+            flex: 1;
+            text-align: center;
+
+          }
+        }
+      }
+      .add-box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+      }
+    </style>
+  </body>
 </html>
