@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-27 01:12:42
+ * @LastEditTime: 2025-03-27 14:53:33
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -34,12 +34,19 @@
           <input
             class="inputname"
             type="text"
-            id="inputData"
+            id="inputname"
             placeholder="请输入员工编号"
           />
         </div>
-
-        <button class="add-btn" id="bianhaobtn">绑定编号</button>
+        <div class="input-box" id="mima">
+          <input
+            class="inputname"
+            type="password"
+            id="inputmima"
+            placeholder="请输密码"
+          />
+        </div>
+        <button class="add-btn" id="bianhaobtn">登陆</button>
       </div>
 
       <div id="shuju" class="shuju">
@@ -47,13 +54,13 @@
           <input
             class="inputname"
             type="text"
-            id="inputData"
+            id="username"
             placeholder="名称"
           />
           <input
             class="inputphone"
             type="text"
-            id="inputData"
+            id="userphone"
             placeholder="电话"
           />
         </div>
@@ -67,110 +74,7 @@
           <div class="phone" id="puone">电话号</div>
           <div class="date" id="date">日期</div>
         </div>
-        <div class="data-box" id="storedData">
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">编号</div>
-            <div class="name" id="name">名称</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">日期</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">编号</div>
-            <div class="name" id="name">名称</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">日期</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">编号</div>
-            <div class="name" id="name">名称</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">日期</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">编号</div>
-            <div class="name" id="name">名称</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">日期</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">编号</div>
-            <div class="name" id="name">名称</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">日期</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">001</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-          <div class="item">
-            <div class="num" id="num">002</div>
-            <div class="name" id="name">张制品</div>
-            <div class="phone" id="puone">电话号</div>
-            <div class="date" id="date">137278378728</div>
-          </div>
-        </div>
+        <div class="data-box" id="storedData"></div>
       </div>
       <img class="headerimg" src="dashangushi.jpg" alt="" />
     </div>
@@ -212,7 +116,7 @@
       }
 
       function load() {
-        let bianhao = localStorage.getItem("bianhao");
+        let bianhao = localStorage.getItem("bianhaoid");
         if (!bianhao) {
           document.getElementById("shuju").style.display = "none";
           document.getElementById("bianhao").style.display = "";
@@ -221,37 +125,187 @@
           document.getElementById("bianhao").style.display = "none";
         }
       }
+      function formatTimestamp(timestamp) {
+        const date = new Date(timestamp);
+
+        
+        return date.toLocaleString().split(' ')[0]; // 转换为本地时间格式
+      }
       // 获取数据库中的数据
       // 读取数据
-      function loadData() {
+      async function loadData() {
         const dataRef = ref(db, "users");
         console.log("读取数据", dataRef);
 
-        get(dataRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              console.log("读取数据", snapshot.val());
-              //   document.getElementById("storedData").innerText =
-              //     "共享数据: " + snapshot.val();
-            } else {
-              //   document.getElementById("storedData").innerText = "没有数据";
-            }
-          })
+        let snapshot = await get(dataRef)
+          .then()
           .catch((error) => {
             console.error("读取数据失败: ", error);
           });
+
+        if (snapshot.exists()) {
+          const dataObject = snapshot.val();
+          const dataArray = Object.keys(dataObject).map((key) => ({
+            id: key,
+            ...dataObject[key],
+          }));
+
+          let showdata = [];
+          if (localStorage.getItem("bianhaoid") == "ds00000") {
+            showdata = dataArray;
+          } else {
+            showdata = dataArray.filter(
+              (t) => t.bianhao == localStorage.getItem("bianhaoid")
+            );
+          }
+
+          console.log("shuju", showdata);
+          //   storedData
+
+          // <div class="item">
+          //     <div class="num" id="num">001</div>
+          //     <div class="name" id="name">张制品</div>
+          //     <div class="phone" id="puone">电话号</div>
+          //     <div class="date" id="date">137278378728</div>
+          //   </div>
+          const container = document.getElementById("storedData");
+
+          container.innerHTML = "";
+          for (let index = 0; index < showdata.length; index++) {
+            const element = showdata[index];
+            let item = document.createElement("item"); // 创建 div
+            item.className = "item"; // 设置 class
+            item.id = "item" + index; // 设置 class
+
+            let numDiv = document.createElement("div"); // 创建 div
+            numDiv.className = "num"; // 设置 class
+            numDiv.id = "num"; // 设置 class
+            numDiv.textContent = element.bianhao; // 设置
+
+            let nameDiv = document.createElement("div"); // 创建 div
+            nameDiv.className = "name"; // 设置 class
+            nameDiv.id = "name"; // 设置 class
+            nameDiv.textContent = element.username; // 设置
+
+            let phoneDiv = document.createElement("div"); // 创建 div
+            phoneDiv.className = "phone"; // 设置 class
+            phoneDiv.id = "phone"; // 设置 class
+            phoneDiv.textContent = element.phone; // 设置
+
+            let dateDiv = document.createElement("div"); // 创建 div
+            dateDiv.className = "date"; // 设置 class
+            dateDiv.id = "date"; // 设置 class
+            dateDiv.textContent = formatTimestamp(element.date); // 设置
+            item.appendChild(numDiv); // 添加到容器中
+            item.appendChild(nameDiv); // 添加到容器中
+            item.appendChild(phoneDiv); // 添加到容器中
+            item.appendChild(dateDiv); // 添加到容器中
+
+            container.appendChild(item); // 添加到容器中
+          }
+
+          console.log("数据数组：", dataArray);
+        } else {
+          //   document.getElementById("storedData").innerText = "没有数据";
+        }
+      }
+
+      // 保存数据到 管理员 Firebase
+      function saveUser(data) {
+        let path = "admin/";
+        let id = getRandom10DigitNumber();
+        const dataRef = ref(db, path + id); // 指定存储路径
+
+        console.log("ssswwwsss", dataRef, data);
+        // return
+        set(dataRef, data) // 将数据存储到指定路径
+          .then(() => {
+            console.log("数据已保存！");
+          })
+          .catch((error) => {
+            console.error("保存数据失败: ", error);
+          });
+      }
+
+      // 登陆
+      async function login(data) {
+        const dataRef = ref(db, "admin");
+        console.log("读取数据", dataRef, data);
+
+        let snapshot = await get(dataRef)
+          .then()
+          .catch((error) => {
+            console.error("读取数据失败: ", error);
+          });
+
+        if (snapshot.exists()) {
+          const dataObject = snapshot.val();
+          const dataArray = Object.keys(dataObject).map((key) => ({
+            id: key,
+            ...dataObject[key],
+          }));
+          console.log("数据数组：", dataArray);
+
+          let ishas = dataArray.find(
+            (t) => t.bianhao == data.bianhao && t.password == data.password
+          );
+          if (ishas) {
+            document.getElementById("shuju").style.display = "";
+            document.getElementById("bianhao").style.display = "none";
+            let bianhao = localStorage.setItem("bianhaoid", data.bianhao);
+          } else {
+            document.getElementById("shuju").style.display = "none";
+            document.getElementById("bianhao").style.display = "";
+            alert("用户名或密码错误！");
+          }
+        } else {
+          //   document.getElementById("storedData").innerText = "没有数据";
+        }
+      }
+
+      //检测数据是否存在
+      async function isHas(data) {
+        const dataRef = ref(db, "users");
+        console.log("读取数据", dataRef);
+
+        let snapshot = await get(dataRef)
+          .then()
+          .catch((error) => {
+            console.error("读取数据失败: ", error);
+          });
+
+        if (snapshot.exists()) {
+          console.log("读取数据", snapshot.val());
+
+          const dataObject = snapshot.val();
+          const dataArray = Object.keys(dataObject).map((key) => ({
+            id: key,
+            ...dataObject[key],
+          }));
+          console.log("数据数组：", dataArray);
+
+          let ishas = dataArray.filter((t) => t.phone == data.phone);
+
+          console.log("ishas", ishas, ishas.length > 0);
+
+          return ishas.length > 0;
+        } else {
+          return false;
+        }
+        return false;
       }
       // 保存数据到 Firebase
       function saveData(data) {
         let path = "users/";
         let id = getRandom10DigitNumber();
-        const dataRef = ref(db, patt + id); // 指定存储路径
+        const dataRef = ref(db, path + id); // 指定存储路径
 
         console.log("ssswwwsss", dataRef, data);
 
         set(dataRef, data) // 将数据存储到指定路径
           .then(() => {
             console.log("数据已保存！");
+            loadData();
           })
           .catch((error) => {
             console.error("保存数据失败: ", error);
@@ -262,23 +316,73 @@
       document.getElementById("myButton").addEventListener("click", () => {
         // 调用导入的函数
         console.log("ssssss");
+
+        let name = document.getElementById("username").value;
+        let phone = document.getElementById("userphone").value;
         let data = {
-          bianhao: "zhangzhimin",
-          username: "zhangzhimin",
+          bianhao: localStorage.getItem("bianhaoid"),
+          username: name,
           date: Date.now(),
-          phone: "137867867289",
+          phone: phone,
         };
-        saveData(data);
+
+        //检测数据是否存在
+        const dataRef = ref(db, "users");
+        console.log("读取数据", dataRef);
+
+        get(dataRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              console.log("读取数据", snapshot.val());
+
+              const dataObject = snapshot.val();
+              const dataArray = Object.keys(dataObject).map((key) => ({
+                id: key,
+                ...dataObject[key],
+              }));
+              console.log("数据数组：", dataArray);
+
+              let ishas = dataArray.filter((t) => t.phone == data.phone);
+
+              console.log("ishas", ishas, ishas.length > 0);
+
+              let flag = ishas.length > 0;
+
+              if (flag) {
+                console.log("shuju", flag);
+                alert("用户已存在！");
+              } else {
+                saveData(data);
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("读取数据失败: ", error);
+          });
       });
       //输入编号
-      document.getElementById("bianhao").addEventListener("click", () => {
-        let bianhao = document.getElementById("inputData").value;
-        localStorage.setItem("bianhao", bianhao);
+      //   document.getElementById("bianhao").addEventListener("click", () => {
+      //     let bianhao = document.getElementById("inputData").value;
+      //     localStorage.setItem("bianhao", bianhao);
+      //   });
+
+      //添加数据
+      document.getElementById("bianhaobtn").addEventListener("click", () => {
+        let name = document.getElementById("inputname").value;
+        let ps = document.getElementById("inputmima").value;
+
+        let data = {
+          bianhao: name,
+          password: ps,
+        };
+        login(data);
+        // localStorage.setItem("bianhao", bianhao);
       });
       // 调用方法
       window.onload = function () {
-        loadData(); // 页面加载时读取数据
         load();
+
+        loadData(); // 页面加载时读取数据
         // listenForChanges(); // 监听数据变化
       };
       console.log("ssss", analytics, db);
@@ -335,7 +439,7 @@
       }
       .data-box {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
         align-items: center;
         border: 1px solid #000;
