@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-26 17:52:18
+ * @LastEditTime: 2025-03-27 01:12:42
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,7 +20,7 @@
         font-family: Arial, sans-serif;
       }
       #storedData {
-        margin-top: 20px;
+        /* margin-top: 20px; */
         font-size: 18px;
       }
     </style>
@@ -29,28 +29,150 @@
     <div class="add-box">
       <h1>大山故事信息系统</h1>
 
-      <di class="input-box">
-        <input class="inputname" type="text" id="inputData" placeholder="名称" />
-        <input class="inputphone" type="text" id="inputData" placeholder="电话" />
-      </di>
+      <div id="bianhao">
+        <div class="input-box" id="bianhaoinput">
+          <input
+            class="inputname"
+            type="text"
+            id="inputData"
+            placeholder="请输入员工编号"
+          />
+        </div>
 
-      <button class="add-btn" id="myButton">添加数据</button>
-      <!-- <button class="add-btn" id="myButton2">检测是否存在</button> -->
+        <button class="add-btn" id="bianhaobtn">绑定编号</button>
+      </div>
 
-      <div class="data-box" id="storedData">
-        <div class="item">
+      <div id="shuju" class="shuju">
+        <div class="input-box">
+          <input
+            class="inputname"
+            type="text"
+            id="inputData"
+            placeholder="名称"
+          />
+          <input
+            class="inputphone"
+            type="text"
+            id="inputData"
+            placeholder="电话"
+          />
+        </div>
+
+        <button class="add-btn" id="myButton">添加数据</button>
+        <!-- <button class="add-btn" id="myButton2">检测是否存在</button> -->
+
+        <div class="itemheader">
+          <div class="num" id="num">编号</div>
+          <div class="name" id="name">名称</div>
+          <div class="phone" id="puone">电话号</div>
+          <div class="date" id="date">日期</div>
+        </div>
+        <div class="data-box" id="storedData">
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">编号</div>
             <div class="name" id="name">名称</div>
             <div class="phone" id="puone">电话号</div>
-        </div>
-        <div class="item">
-          <div class="name" id="name">张制品</div>
-          <div class="phone" id="puone">137278378728</div>
-        </div>
-        <div class="item">
-          <div class="name" id="name">张制品</div>
-          <div class="phone" id="puone">137278378728</div>
+            <div class="date" id="date">日期</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">编号</div>
+            <div class="name" id="name">名称</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">日期</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">编号</div>
+            <div class="name" id="name">名称</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">日期</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">编号</div>
+            <div class="name" id="name">名称</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">日期</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">编号</div>
+            <div class="name" id="name">名称</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">日期</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">001</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
+          <div class="item">
+            <div class="num" id="num">002</div>
+            <div class="name" id="name">张制品</div>
+            <div class="phone" id="puone">电话号</div>
+            <div class="date" id="date">137278378728</div>
+          </div>
         </div>
       </div>
+      <img class="headerimg" src="dashangushi.jpg" alt="" />
     </div>
 
     <script type="module">
@@ -89,6 +211,16 @@
         return Math.floor(1000000000 + Math.random() * 9000000000);
       }
 
+      function load() {
+        let bianhao = localStorage.getItem("bianhao");
+        if (!bianhao) {
+          document.getElementById("shuju").style.display = "none";
+          document.getElementById("bianhao").style.display = "";
+        } else {
+          document.getElementById("shuju").style.display = "";
+          document.getElementById("bianhao").style.display = "none";
+        }
+      }
       // 获取数据库中的数据
       // 读取数据
       function loadData() {
@@ -129,49 +261,77 @@
       // 获取按钮并添加点击事件监听器
       document.getElementById("myButton").addEventListener("click", () => {
         // 调用导入的函数
-
         console.log("ssssss");
         let data = {
+          bianhao: "zhangzhimin",
           username: "zhangzhimin",
+          date: Date.now(),
           phone: "137867867289",
         };
         saveData(data);
       });
+      //输入编号
+      document.getElementById("bianhao").addEventListener("click", () => {
+        let bianhao = document.getElementById("inputData").value;
+        localStorage.setItem("bianhao", bianhao);
+      });
       // 调用方法
       window.onload = function () {
         loadData(); // 页面加载时读取数据
+        load();
         // listenForChanges(); // 监听数据变化
       };
       console.log("ssss", analytics, db);
     </script>
 
     <style>
+      .headerimg {
+        height: 180px;
+      }
       .add-btn {
         margin: 10px;
         width: 200px;
         height: 35px;
         font-size: 16px;
-
-     
       }
-      .inputname{
-            width: 200px;
-            height: 35px;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        .inputphone{
-            width: 200px;
-            height: 35px;
-            font-size: 16px;
-        }
-      .input-box
-      {
+      .inputname {
+        width: 200px;
+        height: 35px;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+      .inputphone {
+        width: 200px;
+        height: 35px;
+        font-size: 16px;
+      }
+      .input-box {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         align-items: center;
+      }
+      .itemheader {
+        display: flex;
+        width: 100%;
+        margin: 0 auto;
+        align-items: center;
+        box-sizing: border-box;
+        /* justify-content: center; */
+        .num {
+          width: 20%;
+          text-align: center;
+        }
+        .name {
+          width: 20%;
+          text-align: center;
+        }
+
+        .phone {
+          width: 30%;
+          text-align: center;
+        }
       }
       .data-box {
         display: flex;
@@ -183,34 +343,58 @@
         padding-bottom: 10px;
         box-sizing: border-box;
 
-        width: 300px;
-        .item {
-        box-sizing: border-box;
+        width: 100%;
+        margin: 0 auto;
 
-            width: 100%;
+        height: 400px;
+        overflow: scroll;
+
+        .item {
+          box-sizing: border-box;
+          font-size: 12px;
+          width: 100%;
           line-height: 30px;
           height: 30px;
           padding: 0px 10px;
           border-bottom: 1px solid #000;
           display: flex;
+          .num {
+            border-right: 1px solid #000;
+            width: 20%;
+            text-align: center;
+          }
           .name {
             border-right: 1px solid #000;
-            flex: 1;
+            width: 20%;
             text-align: center;
           }
-          .phone{
-            flex: 1;
-            text-align: center;
 
+          .phone {
+            width: 30%;
+            border-right: 1px solid #000;
+            text-align: center;
+          }
+          .date {
           }
         }
+      }
+      .bianhao {
+        width: 100%;
+      }
+      .shuju {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
       }
       .add-box {
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        max-width: 600px;
+        max-width: 90%;
+        margin: 0 auto;
       }
     </style>
   </body>
