@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-28 18:28:26
+ * @LastEditTime: 2025-03-28 18:42:26
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -140,9 +140,16 @@
         if (!bianhao) {
           document.getElementById("shuju").style.display = "none";
           document.getElementById("bianhao").style.display = "";
+          document.getElementById("tuichubtn").style.display = "none";
         } else {
           document.getElementById("shuju").style.display = "";
+          document.getElementById("tuichubtn").style.display = "";
           document.getElementById("bianhao").style.display = "none";
+        }
+        if (localStorage.getItem("bianhaoid") == "ds00000") {
+          document.getElementById("uploadExcel").style.display = "";
+        } else {
+          document.getElementById("uploadExcel").style.display = "none";
         }
       }
       function formatTimestamp(timestamp) {
@@ -295,11 +302,17 @@
             document.getElementById("shuju").style.display = "";
             document.getElementById("bianhao").style.display = "none";
             localStorage.setItem("bianhaoid", data.bianhao);
-
+            document.getElementById("tuichubtn").style.display = "";
+            if (localStorage.getItem("bianhaoid") == "ds00000") {
+              document.getElementById("uploadExcel").style.display = "";
+            } else {
+              document.getElementById("uploadExcel").style.display = "none";
+            }
             loadData(); // 页面加载时读取数据
           } else {
             document.getElementById("shuju").style.display = "none";
             document.getElementById("bianhao").style.display = "";
+            document.getElementById("tuichubtn").style.display = "none";
             alert("用户名或密码错误！");
           }
         } else {
@@ -424,6 +437,7 @@
       });
       document.getElementById("tuichubtn").addEventListener("click", () => {
         localStorage.removeItem("bianhaoid");
+        document.getElementById("tuichubtn").style.display = "none";
 
         let bianhao = localStorage.getItem("bianhaoid");
         if (!bianhao) {
@@ -431,7 +445,14 @@
           document.getElementById("bianhao").style.display = "";
         } else {
           document.getElementById("shuju").style.display = "";
+          document.getElementById("shuju").style.display = "";
           document.getElementById("bianhao").style.display = "none";
+        }
+
+        if (localStorage.getItem("bianhaoid") == "ds00000") {
+          document.getElementById("uploadExcel").style.display = "";
+        } else {
+          document.getElementById("uploadExcel").style.display = "none";
         }
         // localStorage.setItem("bianhao", bianhao);
       });
