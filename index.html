@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-27 15:25:52
+ * @LastEditTime: 2025-03-28 12:44:51
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -50,6 +50,7 @@
       </div>
 
       <div id="shuju" class="shuju">
+        <button class="add-btn tuichubtn" id="tuichubtn">退出</button>
         <div class="input-box">
           <input
             class="inputname"
@@ -64,6 +65,7 @@
             placeholder="电话"
           />
         </div>
+     
 
         <button class="add-btn" id="myButton">添加数据</button>
         <!-- <button class="add-btn" id="myButton2">检测是否存在</button> -->
@@ -412,6 +414,21 @@
         login(data);
         // localStorage.setItem("bianhao", bianhao);
       });
+      document.getElementById("tuichubtn").addEventListener("click", () => {
+     
+        localStorage.removeItem('bianhaoid')
+
+        let bianhao = localStorage.getItem("bianhaoid");
+        if (!bianhao) {
+          document.getElementById("shuju").style.display = "none";
+          document.getElementById("bianhao").style.display = "";
+        } else {
+          document.getElementById("shuju").style.display = "";
+          document.getElementById("bianhao").style.display = "none";
+        }
+        // localStorage.setItem("bianhao", bianhao);
+      });
+      
       // 调用方法
       window.onload = function () {
         load();
@@ -423,6 +440,15 @@
     </script>
 
     <style>
+
+
+  .tuichubtn
+  {
+     position: absolute;
+     right: 10px;
+     top: 30px;
+     z-index: 1;
+  }
       table {
         width: 100%;
         border-collapse: collapse;
