@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-04-07 23:50:20
+ * @LastEditTime: 2025-04-07 23:52:58
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -85,7 +85,7 @@
         </div>
         <div class="data-box" id="storedData"></div> -->
 
-        <div class="totaltezt">
+        <div class="totaltezt"  id="totaltezt">
           <span>当前总人数(</span>
           <span id="totalren" class="total">0</span>
           <span>)人</span>
@@ -172,8 +172,13 @@
         }
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
+          document.getElementById("totaltezt").style.display = "";
+
+          
         } else {
           document.getElementById("uploadExcel").style.display = "none";
+          document.getElementById("totaltezt").style.display = "none";
+
         }
       }
       function formatTimestamp(timestamp) {
@@ -294,8 +299,12 @@
             document.getElementById("tuichubtn").style.display = "";
             if (localStorage.getItem("bianhaoid") == "ds00000") {
               document.getElementById("uploadExcel").style.display = "";
+          document.getElementById("totaltezt").style.display = "";
+
             } else {
               document.getElementById("uploadExcel").style.display = "none";
+          document.getElementById("totaltezt").style.display = "none";
+
             }
             let num= localStorage.getItem("bianhaoid")
             loadData(num); // 页面加载时读取数据
@@ -442,8 +451,12 @@
 
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
+          document.getElementById("totaltezt").style.display = "";
+
         } else {
           document.getElementById("uploadExcel").style.display = "none";
+          document.getElementById("totaltezt").style.display = "none";
+
         }
         // localStorage.setItem("bianhao", bianhao);
       });
