@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-04-07 23:52:58
+ * @LastEditTime: 2025-04-08 00:28:39
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -85,7 +85,7 @@
         </div>
         <div class="data-box" id="storedData"></div> -->
 
-        <div class="totaltezt"  id="totaltezt">
+        <div class="totaltezt" id="totaltezt">
           <span>当前总人数(</span>
           <span id="totalren" class="total">0</span>
           <span>)人</span>
@@ -105,7 +105,7 @@
           </select>
         </div>
 
-        <div style="height: 300px; overflow-y: auto;">
+        <div style="height: 300px; overflow-y: auto">
           <table id="myTable" class="myTable">
             <thead>
               <tr>
@@ -118,7 +118,6 @@
             <tbody></tbody>
           </table>
         </div>
-        
       </div>
       <img class="headerimg" src="dashangushi.jpg" alt="" />
     </div>
@@ -173,12 +172,9 @@
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
           document.getElementById("totaltezt").style.display = "";
-
-          
         } else {
           document.getElementById("uploadExcel").style.display = "none";
           document.getElementById("totaltezt").style.display = "none";
-
         }
       }
       function formatTimestamp(timestamp) {
@@ -188,9 +184,8 @@
       }
       // 获取数据库中的数据
 
-      
       // 读取数据
-      async function loadData(num='ds00000') {
+      async function loadData(num = "ds00000") {
         const dataRef = ref(db, "users");
         console.log("读取数据", dataRef);
         const userTypeSelect = document.getElementById("userType");
@@ -211,9 +206,7 @@
           if (num == "ds00000") {
             showdata = dataArray;
           } else {
-            showdata = dataArray.filter(
-              (t) => t.bianhao == num
-            );
+            showdata = dataArray.filter((t) => t.bianhao == num);
           }
           showdata.sort((a, b) => new Date(b.date) - new Date(a.date));
           console.log("shuju", showdata);
@@ -223,7 +216,7 @@
 
           const tbody = document.querySelector("#myTable tbody");
 
-          tbody.innerHTML=''
+          tbody.innerHTML = "";
           showdata.forEach((row) => {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
@@ -244,8 +237,6 @@
 
             tbody.appendChild(tr);
           });
-
-         
 
           console.log("数据数组：", dataArray);
         } else {
@@ -299,14 +290,12 @@
             document.getElementById("tuichubtn").style.display = "";
             if (localStorage.getItem("bianhaoid") == "ds00000") {
               document.getElementById("uploadExcel").style.display = "";
-          document.getElementById("totaltezt").style.display = "";
-
+              document.getElementById("totaltezt").style.display = "";
             } else {
               document.getElementById("uploadExcel").style.display = "none";
-          document.getElementById("totaltezt").style.display = "none";
-
+              document.getElementById("totaltezt").style.display = "none";
             }
-            let num= localStorage.getItem("bianhaoid")
+            let num = localStorage.getItem("bianhaoid");
             loadData(num); // 页面加载时读取数据
           } else {
             document.getElementById("shuju").style.display = "none";
@@ -361,11 +350,15 @@
         set(dataRef, data) // 将数据存储到指定路径
           .then(() => {
             console.log("数据已保存！");
-            let num= localStorage.getItem("bianhaoid")
+            alert("添加成功！");
+            document.getElementById("myButton").disabled = false;
+
+            let num = localStorage.getItem("bianhaoid");
             loadData(num); // 页面加载时读取数据
           })
           .catch((error) => {
             console.error("保存数据失败: ", error);
+            document.getElementById("myButton").disabled = false;
           });
       }
 
@@ -383,10 +376,15 @@
           phone: phone,
         };
 
+        if (phone == "" || name == "") {
+          alert("请输入电话和姓名！");
+          return;
+        }
+
         //检测数据是否存在
         const dataRef = ref(db, "users");
         console.log("读取数据", dataRef);
-
+        document.getElementById("myButton").disabled = true;
         get(dataRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
@@ -407,6 +405,8 @@
 
               if (flag) {
                 console.log("shuju", flag);
+                document.getElementById("myButton").disabled = false;
+
                 alert("用户已存在！");
               } else {
                 saveData(data);
@@ -415,6 +415,7 @@
           })
           .catch((error) => {
             console.error("读取数据失败: ", error);
+            document.getElementById("myButton").disabled = false;
           });
       });
       //输入编号
@@ -452,11 +453,9 @@
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
           document.getElementById("totaltezt").style.display = "";
-
         } else {
           document.getElementById("uploadExcel").style.display = "none";
           document.getElementById("totaltezt").style.display = "none";
-
         }
         // localStorage.setItem("bianhao", bianhao);
       });
@@ -468,8 +467,8 @@
         // const users = data[selected] || [];
         // let num= localStorage.getItem("bianhaoid")
 
-        console.log('sss',selected)
-        loadData(selected+''); // 页面加载时读取数据
+        console.log("sss", selected);
+        loadData(selected + ""); // 页面加载时读取数据
         // 展示结果
       });
 
@@ -525,7 +524,7 @@
         //加载数据
 
         alert("数据导入成功！");
-        let num= localStorage.getItem("bianhaoid")
+        let num = localStorage.getItem("bianhaoid");
         loadData(num); // 页面加载时读取数据
       }
 
@@ -533,7 +532,7 @@
       window.onload = function () {
         load();
 
-        let num= localStorage.getItem("bianhaoid")
+        let num = localStorage.getItem("bianhaoid");
         loadData(num); // 页面加载时读取数据
         // listenForChanges(); // 监听数据变化
       };
@@ -548,22 +547,23 @@
         align-items: center;
       }
       table {
-      border-collapse: collapse;
-      width: 100%;
-    }
+        border-collapse: collapse;
+        width: 100%;
+      }
 
-    th, td {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-    }
+      th,
+      td {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+      }
 
-    thead th {
-      position: sticky;
-      top: 0;
-      background-color: #f2f2f2;
-      z-index: 2;
-    }
-      .search{
+      thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f2f2f2;
+        z-index: 2;
+      }
+      .search {
         margin-left: 30px;
       }
       .menubox {
