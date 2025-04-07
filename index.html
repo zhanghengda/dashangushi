@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-03-28 18:42:26
+ * @LastEditTime: 2025-04-07 23:50:20
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -84,17 +84,41 @@
           <div class="date" id="date">日期</div>
         </div>
         <div class="data-box" id="storedData"></div> -->
-        <table id="myTable">
-          <thead>
-            <tr>
-              <th>编号</th>
-              <th>名称</th>
-              <th>电话号</th>
-              <th>日期</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+
+        <div class="totaltezt">
+          <span>当前总人数(</span>
+          <span id="totalren" class="total">0</span>
+          <span>)人</span>
+          <span class="search">选择编号</span>
+          <select id="userType">
+            <option value="ds00000">全部</option>
+            <option value="ds00001">ds00001</option>
+            <option value="ds00002">ds00002</option>
+            <option value="ds00003">ds00003</option>
+            <option value="ds00004">ds00004</option>
+            <option value="ds00005">ds00005</option>
+            <option value="ds00006">ds00006</option>
+            <option value="ds00007">ds00007</option>
+            <option value="ds00008">ds00008</option>
+            <option value="ds00009">ds00009</option>
+            <option value="ds00010">ds00010</option>
+          </select>
+        </div>
+
+        <div style="height: 300px; overflow-y: auto;">
+          <table id="myTable" class="myTable">
+            <thead>
+              <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>电话号</th>
+                <th>日期</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        
       </div>
       <img class="headerimg" src="dashangushi.jpg" alt="" />
     </div>
@@ -158,11 +182,13 @@
         return date.toLocaleString().split(" ")[0]; // 转换为本地时间格式
       }
       // 获取数据库中的数据
+
+      
       // 读取数据
-      async function loadData() {
+      async function loadData(num='ds00000') {
         const dataRef = ref(db, "users");
         console.log("读取数据", dataRef);
-
+        const userTypeSelect = document.getElementById("userType");
         let snapshot = await get(dataRef)
           .then()
           .catch((error) => {
@@ -177,25 +203,22 @@
           }));
 
           let showdata = [];
-          if (localStorage.getItem("bianhaoid") == "ds00000") {
+          if (num == "ds00000") {
             showdata = dataArray;
           } else {
             showdata = dataArray.filter(
-              (t) => t.bianhao == localStorage.getItem("bianhaoid")
+              (t) => t.bianhao == num
             );
           }
-
+          showdata.sort((a, b) => new Date(b.date) - new Date(a.date));
           console.log("shuju", showdata);
           //   storedData
 
-          // <div class="item">
-          //     <div class="num" id="num">001</div>
-          //     <div class="name" id="name">张制品</div>
-          //     <div class="phone" id="puone">电话号</div>
-          //     <div class="date" id="date">137278378728</div>
-          //   </div>
+          document.getElementById("totalren").innerText = showdata.length;
+
           const tbody = document.querySelector("#myTable tbody");
 
+          tbody.innerHTML=''
           showdata.forEach((row) => {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
@@ -217,41 +240,7 @@
             tbody.appendChild(tr);
           });
 
-          //   const container = document.getElementById("storedData");
-
-          //   container.innerHTML = "";
-          //   for (let index = 0; index < showdata.length; index++) {
-          //     const element = showdata[index];
-          //     let item = document.createElement("item"); // 创建 div
-          //     item.className = "item"; // 设置 class
-          //     item.id = "item" + index; // 设置 class
-
-          //     let numDiv = document.createElement("div"); // 创建 div
-          //     numDiv.className = "num"; // 设置 class
-          //     numDiv.id = "num"; // 设置 class
-          //     numDiv.textContent = element.bianhao; // 设置
-
-          //     let nameDiv = document.createElement("div"); // 创建 div
-          //     nameDiv.className = "name"; // 设置 class
-          //     nameDiv.id = "name"; // 设置 class
-          //     nameDiv.textContent = element.username; // 设置
-
-          //     let phoneDiv = document.createElement("div"); // 创建 div
-          //     phoneDiv.className = "phone"; // 设置 class
-          //     phoneDiv.id = "phone"; // 设置 class
-          //     phoneDiv.textContent = element.phone; // 设置
-
-          //     let dateDiv = document.createElement("div"); // 创建 div
-          //     dateDiv.className = "date"; // 设置 class
-          //     dateDiv.id = "date"; // 设置 class
-          //     dateDiv.textContent = formatTimestamp(element.date); // 设置
-          //     item.appendChild(numDiv); // 添加到容器中
-          //     item.appendChild(nameDiv); // 添加到容器中
-          //     item.appendChild(phoneDiv); // 添加到容器中
-          //     item.appendChild(dateDiv); // 添加到容器中
-
-          //     container.appendChild(item); // 添加到容器中
-          //   }
+         
 
           console.log("数据数组：", dataArray);
         } else {
@@ -308,7 +297,8 @@
             } else {
               document.getElementById("uploadExcel").style.display = "none";
             }
-            loadData(); // 页面加载时读取数据
+            let num= localStorage.getItem("bianhaoid")
+            loadData(num); // 页面加载时读取数据
           } else {
             document.getElementById("shuju").style.display = "none";
             document.getElementById("bianhao").style.display = "";
@@ -362,7 +352,8 @@
         set(dataRef, data) // 将数据存储到指定路径
           .then(() => {
             console.log("数据已保存！");
-            loadData();
+            let num= localStorage.getItem("bianhaoid")
+            loadData(num); // 页面加载时读取数据
           })
           .catch((error) => {
             console.error("保存数据失败: ", error);
@@ -457,6 +448,18 @@
         // localStorage.setItem("bianhao", bianhao);
       });
 
+      const userTypeSelect = document.getElementById("userType");
+      // 监听下拉框变化
+      userTypeSelect.addEventListener("change", function () {
+        const selected = this.value;
+        // const users = data[selected] || [];
+        // let num= localStorage.getItem("bianhaoid")
+
+        console.log('sss',selected)
+        loadData(selected+''); // 页面加载时读取数据
+        // 展示结果
+      });
+
       document
         .getElementById("uploadExcel")
         .addEventListener("change", function (event) {
@@ -508,21 +511,48 @@
         });
         //加载数据
 
-        alert('数据导入成功！')
-        loadData();
+        alert("数据导入成功！");
+        let num= localStorage.getItem("bianhaoid")
+        loadData(num); // 页面加载时读取数据
       }
 
       // 调用方法
       window.onload = function () {
         load();
 
-        loadData(); // 页面加载时读取数据
+        let num= localStorage.getItem("bianhaoid")
+        loadData(num); // 页面加载时读取数据
         // listenForChanges(); // 监听数据变化
       };
       console.log("ssss", analytics, db);
     </script>
 
     <style>
+      .totaltezt {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background-color: #f2f2f2;
+      z-index: 2;
+    }
+      .search{
+        margin-left: 30px;
+      }
       .menubox {
         /* position: absolute;
      right: 10px;
