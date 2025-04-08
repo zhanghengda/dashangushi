@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-04-08 15:56:21
+ * @LastEditTime: 2025-04-08 16:00:02
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -94,20 +94,25 @@
           <span>当前总人数(</span>
           <span id="totalren" class="total">0</span>
           <span>)人</span>
-          <span class="search">选择编号</span>
-          <select id="userType">
-            <option value="ds00000">全部</option>
-            <option value="ds00001">ds00001</option>
-            <option value="ds00002">ds00002</option>
-            <option value="ds00003">ds00003</option>
-            <option value="ds00004">ds00004</option>
-            <option value="ds00005">ds00005</option>
-            <option value="ds00006">ds00006</option>
-            <option value="ds00007">ds00007</option>
-            <option value="ds00008">ds00008</option>
-            <option value="ds00009">ds00009</option>
-            <option value="ds00010">ds00010</option>
-          </select>
+
+
+          <div id="userType-box">
+            <span class="search">选择编号</span>
+            <select id="userType">
+              <option value="ds00000">全部</option>
+              <option value="ds00001">ds00001</option>
+              <option value="ds00002">ds00002</option>
+              <option value="ds00003">ds00003</option>
+              <option value="ds00004">ds00004</option>
+              <option value="ds00005">ds00005</option>
+              <option value="ds00006">ds00006</option>
+              <option value="ds00007">ds00007</option>
+              <option value="ds00008">ds00008</option>
+              <option value="ds00009">ds00009</option>
+              <option value="ds00010">ds00010</option>
+            </select>
+          </div>
+         
         </div>
 
         <div style="height: 300px; overflow-y: auto">
@@ -182,10 +187,10 @@
         }
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
-          document.getElementById("totaltezt").style.display = "";
+          document.getElementById("userType-box").style.display = "";
         } else {
           document.getElementById("uploadExcel").style.display = "none";
-          document.getElementById("totaltezt").style.display = "none";
+          document.getElementById("userType-box").style.display = "none";
         }
       }
       function formatTimestamp(timestamp) {
@@ -304,12 +309,12 @@
 
             if (localStorage.getItem("bianhaoid") == "ds00000") {
               document.getElementById("uploadExcel").style.display = "";
-              document.getElementById("totaltezt").style.display = "";
+              document.getElementById("userType-box").style.display = "";
               // document.getElementById("userinfo").style.display = "";
               // document.getElementById("userid").innerHTML=bianhao
             } else {
               document.getElementById("uploadExcel").style.display = "none";
-              document.getElementById("totaltezt").style.display = "none";
+              document.getElementById("userType-box").style.display = "none";
             }
             let num = localStorage.getItem("bianhaoid");
             loadData(num); // 页面加载时读取数据
@@ -470,10 +475,10 @@
 
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
-          document.getElementById("totaltezt").style.display = "";
+          document.getElementById("userType-box").style.display = "";
         } else {
           document.getElementById("uploadExcel").style.display = "none";
-          document.getElementById("totaltezt").style.display = "none";
+          document.getElementById("userType-box").style.display = "none";
         }
         // localStorage.setItem("bianhao", bianhao);
       });
