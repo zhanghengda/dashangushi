@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-04-08 00:28:39
+ * @LastEditTime: 2025-04-08 15:45:25
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,6 +26,11 @@
     </style>
   </head>
   <body>
+
+    <div class="userinfo" id="userinfo">
+      <span>当前用户：</span>
+      <span class="users" id="userid">ds00000</span>
+    </div>
     <div class="add-box">
       <div class="menubox">
         <input
@@ -164,10 +169,16 @@
           document.getElementById("shuju").style.display = "none";
           document.getElementById("bianhao").style.display = "";
           document.getElementById("tuichubtn").style.display = "none";
+          document.getElementById("userinfo").style.display = "none";
+
+          
         } else {
           document.getElementById("shuju").style.display = "";
           document.getElementById("tuichubtn").style.display = "";
           document.getElementById("bianhao").style.display = "none";
+          document.getElementById("userinfo").style.display = "";
+          document.getElementById("userid").innerHTML=bianhao
+
         }
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
@@ -545,6 +556,15 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      .userinfo
+      {
+        display: flex;
+        justify-content: flex-end;
       }
       table {
         border-collapse: collapse;
@@ -565,6 +585,7 @@
       }
       .search {
         margin-left: 30px;
+        margin-right: 5px;
       }
       .menubox {
         /* position: absolute;
