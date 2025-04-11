@@ -2,7 +2,7 @@
  * @Author: Tony 31960197+zhanghengda@users.noreply.github.com
  * @Date: 2025-03-25 00:05:17
  * @LastEditors: Tony 31960197+zhanghengda@users.noreply.github.com
- * @LastEditTime: 2025-04-08 16:00:02
+ * @LastEditTime: 2025-04-11 23:52:47
  * @FilePath: /undefined/Users/tonyzhang/Documents/GitHub/dashangushi/index.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,7 +26,6 @@
     </style>
   </head>
   <body>
-
     <div class="userinfo" id="userinfo">
       <span>当前用户：</span>
       <span class="users" id="userid">ds00000</span>
@@ -95,7 +94,6 @@
           <span id="totalren" class="total">0</span>
           <span>)人</span>
 
-
           <div id="userType-box">
             <span class="search">选择编号</span>
             <select id="userType">
@@ -112,17 +110,18 @@
               <option value="ds00010">ds00010</option>
             </select>
           </div>
-         
         </div>
 
         <div style="height: 300px; overflow-y: auto">
           <table id="myTable" class="myTable">
             <thead>
               <tr>
+                <th>索引</th>
                 <th>编号</th>
                 <th>名称</th>
                 <th>电话号</th>
                 <th>日期</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -141,6 +140,10 @@
         ref,
         set,
         get,
+        query,
+        orderByChild,
+        equalTo,
+        remove,
         child,
         onValue,
       } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
@@ -175,15 +178,12 @@
           document.getElementById("bianhao").style.display = "";
           document.getElementById("tuichubtn").style.display = "none";
           document.getElementById("userinfo").style.display = "none";
-
-          
         } else {
           document.getElementById("shuju").style.display = "";
           document.getElementById("tuichubtn").style.display = "";
           document.getElementById("bianhao").style.display = "none";
           document.getElementById("userinfo").style.display = "";
-          document.getElementById("userid").innerHTML=bianhao
-
+          document.getElementById("userid").innerHTML = bianhao;
         }
         if (localStorage.getItem("bianhaoid") == "ds00000") {
           document.getElementById("uploadExcel").style.display = "";
@@ -225,7 +225,7 @@
             showdata = dataArray.filter((t) => t.bianhao == num);
           }
           showdata.sort((a, b) => new Date(b.date) - new Date(a.date));
-          console.log("shuju", showdata);
+          // console.log("shuju", showdata);
           //   storedData
 
           document.getElementById("totalren").innerText = showdata.length;
@@ -233,11 +233,17 @@
           const tbody = document.querySelector("#myTable tbody");
 
           tbody.innerHTML = "";
-          showdata.forEach((row) => {
+          showdata.forEach((row,i) => {
             const tr = document.createElement("tr");
             const td = document.createElement("td");
-            td.textContent = row.bianhao;
+            td.textContent = i+1;
             tr.appendChild(td);
+
+
+            const td0 = document.createElement("td");
+            td0.textContent = row.bianhao;
+            tr.appendChild(td0);
+
 
             const td1 = document.createElement("td");
             td1.textContent = row.username;
@@ -251,13 +257,51 @@
             td3.textContent = formatTimestamp(row.date);
             tr.appendChild(td3);
 
+            const td4 = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "删除";
+            deleteButton.addEventListener("click", () => {
+              // row.remove(); // 删除整行
+
+              console.log("删除", row);
+
+              const usersRef = ref(db, "users");
+
+              console.log('ssssss',usersRef)
+              const q = query(
+                usersRef,
+                orderByChild("phone"),
+                equalTo(row.phone)
+              );
+
+              const snapshot = get(q).then((snapshot) => {
+                if (snapshot.exists()) {
+                  snapshot.forEach((childSnapshot) => {
+                    const userKey = childSnapshot.key;
+                    remove(ref(db, `users/${userKey}`));
+                    let num = localStorage.getItem("bianhaoid");
+                    loadData(num); // 页面加载时读取数据
+                    console.log("Deleted user with key:", userKey);
+                  });
+                } else {
+                  console.log("No user found with that email.");
+                }
+              });
+            });
+            td4.appendChild(deleteButton);
+            tr.appendChild(td4);
+
             tbody.appendChild(tr);
           });
 
-          console.log("数据数组：", dataArray);
+          // console.log("数据数组：", dataArray);
         } else {
           //   document.getElementById("storedData").innerText = "没有数据";
         }
+      }
+
+      function deleteRow(row) {
+        // console.log("删除", row);
       }
 
       // 保存数据到 管理员 Firebase
@@ -266,7 +310,7 @@
         let id = getRandom10DigitNumber();
         const dataRef = ref(db, path + id); // 指定存储路径
 
-        console.log("ssswwwsss", dataRef, data);
+        // console.log("ssswwwsss", dataRef, data);
         // return
         set(dataRef, data) // 将数据存储到指定路径
           .then(() => {
@@ -280,7 +324,7 @@
       // 登陆
       async function login(data) {
         const dataRef = ref(db, "admin");
-        console.log("读取数据", dataRef, data);
+        // console.log("读取数据", dataRef, data);
 
         let snapshot = await get(dataRef)
           .then()
@@ -294,7 +338,7 @@
             id: key,
             ...dataObject[key],
           }));
-          console.log("数据数组：", dataArray);
+          // console.log("数据数组：", dataArray);
 
           let ishas = dataArray.find(
             (t) => t.bianhao == data.bianhao && t.password == data.password
@@ -304,8 +348,9 @@
             document.getElementById("bianhao").style.display = "none";
             localStorage.setItem("bianhaoid", data.bianhao);
             document.getElementById("tuichubtn").style.display = "";
-              document.getElementById("userinfo").style.display = "";
-              document.getElementById("userid").innerHTML = localStorage.getItem("bianhaoid") ;
+            document.getElementById("userinfo").style.display = "";
+            document.getElementById("userid").innerHTML =
+              localStorage.getItem("bianhaoid");
 
             if (localStorage.getItem("bianhaoid") == "ds00000") {
               document.getElementById("uploadExcel").style.display = "";
@@ -334,7 +379,7 @@
       //检测数据是否存在
       async function isHas(data) {
         const dataRef = ref(db, "users");
-        console.log("读取数据", dataRef);
+        // console.log("读取数据", dataRef);
 
         let snapshot = await get(dataRef)
           .then()
@@ -343,18 +388,18 @@
           });
 
         if (snapshot.exists()) {
-          console.log("读取数据", snapshot.val());
+          // console.log("读取数据", snapshot.val());
 
           const dataObject = snapshot.val();
           const dataArray = Object.keys(dataObject).map((key) => ({
             id: key,
             ...dataObject[key],
           }));
-          console.log("数据数组：", dataArray);
+          // console.log("数据数组：", dataArray);
 
           let ishas = dataArray.filter((t) => t.phone == data.phone);
 
-          console.log("ishas", ishas, ishas.length > 0);
+          // console.log("ishas", ishas, ishas.length > 0);
 
           return ishas.length > 0;
         } else {
@@ -368,7 +413,7 @@
         let id = getRandom10DigitNumber();
         const dataRef = ref(db, path + id); // 指定存储路径
 
-        console.log("ssswwwsss", dataRef, data);
+        // console.log("ssswwwsss", dataRef, data);
 
         set(dataRef, data) // 将数据存储到指定路径
           .then(() => {
@@ -427,7 +472,7 @@
               let flag = ishas.length > 0;
 
               if (flag) {
-                console.log("shuju", flag);
+                // console.log("shuju", flag);
                 document.getElementById("myButton").disabled = false;
 
                 alert("用户已存在！");
@@ -517,12 +562,9 @@
         });
 
       function displayExcelData(data) {
-        // let tableHead = document.querySelector("#excelTable thead");
-        // let tableBody = document.querySelector("#excelTable tbody");
-
-        // tableHead.innerHTML = ""; // 清空表头
-        // tableBody.innerHTML = ""; // 清空表格
         console.log("ssss", data);
+
+        let count = 0;
         data.forEach((row, rowIndex) => {
           console.log("row", row);
           let path = "users/";
@@ -536,17 +578,49 @@
             phone: row[2],
           };
 
-          set(dataRef, data) // 将数据存储到指定路径
-            .then(() => {
-              console.log("数据已保存！");
+          //检测数据是否存在
+          const userRef = ref(db, "users");
+
+          document.getElementById("myButton").disabled = true;
+          get(userRef)
+            .then((snapshot) => {
+              if (snapshot.exists()) {
+                console.log("读取数据", snapshot.val());
+
+                const dataObject = snapshot.val();
+                const dataArray = Object.keys(dataObject).map((key) => ({
+                  id: key,
+                  ...dataObject[key],
+                }));
+                console.log("数据数组：", dataArray);
+
+                let ishas = dataArray.filter((t) => t.phone == data.phone);
+
+                console.log("ishas", ishas, ishas.length > 0);
+
+                let flag = ishas.length > 0;
+   console.log('ishas',ishas)
+                if (!flag) {
+                  set(dataRef, data) // 将数据存储到指定路径
+                    .then(() => {
+                      count++;
+                      console.log("数据已保存！");
+                    })
+                    .catch((error) => {
+                      console.error("保存数据失败: ", error);
+                    });
+                }
+              }
             })
             .catch((error) => {
-              console.error("保存数据失败: ", error);
+              console.error("读取数据失败: ", error);
+              document.getElementById("myButton").disabled = false;
             });
         });
+
         //加载数据
 
-        alert("数据导入成功！");
+        alert(count + "条数据导入成功！");
         let num = localStorage.getItem("bianhaoid");
         loadData(num); // 页面加载时读取数据
       }
@@ -563,8 +637,7 @@
     </script>
 
     <style>
-
-      body{
+      body {
         width: 100%;
       }
       .totaltezt {
@@ -577,8 +650,7 @@
         margin-bottom: 5px;
       }
 
-      .userinfo
-      {
+      .userinfo {
         display: flex;
         justify-content: flex-end;
         padding-right: 20px;
@@ -592,11 +664,13 @@
       td {
         padding: 8px 12px;
         border: 1px solid #ddd;
+        font-size: 12px;
       }
 
       thead th {
         position: sticky;
         top: 0;
+        font-size: 12px;
         background-color: #f2f2f2;
         z-index: 2;
       }
